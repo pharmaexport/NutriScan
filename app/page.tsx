@@ -1,7 +1,7 @@
 const metrics = [
-  { label: "Performance", value: "91", detail: "Carburant propre pour effort long" },
-  { label: "Recup", value: "84", detail: "Proteines + magnesium + B12" },
-  { label: "Glycemie", value: "A-", detail: "Sucres rapides sous controle" }
+  { label: "Performance", value: "Scan", detail: "Camera EAN / UPC active sur mobile" },
+  { label: "Base", value: "OFF", detail: "Recherche produit via Open Food Facts" },
+  { label: "Science", value: "VNR", detail: "Targets Europe et score sport" }
 ];
 
 const vnr = [
@@ -12,10 +12,10 @@ const vnr = [
 ];
 
 const science = [
-  "VNR Europe integrees pour micronutriments et apports de reference.",
-  "Score sport separe : energie utile, proteines, sel, sucres, densite micronutritionnelle.",
-  "Lecture scientifique : NOVA, charge glycemique, qualite proteique, niveau de preuve.",
-  "Sources prevues : Open Food Facts, CIQUAL, ANSES et references UE."
+  "Scan reel par camera sur la page /scan.",
+  "Lookup produit via Open Food Facts, sans base proprietaire copiee.",
+  "Score sport separe : proteines, sucres, sel, satures, NOVA et Nutri-Score.",
+  "Targets Europe integrees pour VNR et apports de reference."
 ];
 
 export default function HomePage() {
@@ -23,26 +23,26 @@ export default function HomePage() {
     <main className="pageShell">
       <nav className="topbar">
         <div className="brand"><span>NS</span> NutriScan</div>
-        <div className="navLinks"><a href="/scan">Scan</a><a href="#science">Science</a><a href="#vnr">VNR Europe</a></div>
+        <div className="navLinks"><a href="/scan">Scan reel</a><a href="#science">Science</a><a href="#vnr">VNR Europe</a></div>
       </nav>
 
       <section className="hero">
         <div className="heroCopy">
           <p className="eyebrow">Nutrition sport extreme</p>
-          <h1>Scanne ton produit. Vois s'il tient la route en performance reelle.</h1>
-          <p className="lead">Une interface consumer simple, mais un moteur plus scientifique : carburant, recuperation, micronutriments, glycemie et niveau de preuve.</p>
-          <div className="actions"><a className="primary" href="/scan">Ouvrir le scan</a><a className="secondary" href="#science">Voir le moteur science</a></div>
+          <h1>Scanne un vrai code barre alimentaire.</h1>
+          <p className="lead">La home ne simule plus de produit. Clique sur le bouton, autorise la camera, puis scanne un EAN / UPC reel ou saisis le code manuellement.</p>
+          <div className="actions"><a className="primary" href="/scan">Ouvrir la camera</a><a className="secondary" href="#science">Voir le moteur science</a></div>
         </div>
 
         <div className="phone" id="scan">
-          <div className="scanHeader"><span className="dot" /> Scan produit</div>
-          <div className="barcode"><span /><span /><span /><span /><span /><span /><span /></div>
-          <div className="productCard">
-            <div><p className="muted">Produit test</p><h2>Barre endurance cacao</h2></div>
-            <div className="grade">A</div>
+          <div className="scanHeader"><span className="dot" /> Scanner reel</div>
+          <div className="liveScanCard">
+            <span className="cameraIcon">⌁</span>
+            <h2>Aucun faux code-barres</h2>
+            <p>Le scan fonctionne sur la page dediee avec camera mobile et saisie manuelle de secours.</p>
+            <a className="primary" href="/scan">Aller au scan</a>
           </div>
-          <div className="scoreRing"><strong>91</strong><span>Score extreme</span></div>
-          <div className="warning good">Bon choix avant sortie longue</div>
+          <div className="warning good">Source produit : Open Food Facts</div>
         </div>
       </section>
 
