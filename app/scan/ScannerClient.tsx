@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import styles from "./scan.module.css";
 
 type Product = {
   name: string;
@@ -126,13 +127,13 @@ export default function ScannerClient() {
   }, []);
 
   return (
-    <main className="pageShell scannerPage">
+    <main className={`pageShell ${styles.scannerPage}`}>
       <nav className="topbar">
         <a className="brand" href="/"><span>NS</span> NutriScan</a>
         <div className="navLinks"><a href="/">Accueil</a><a href="#result">Resultat</a></div>
       </nav>
 
-      <section className="scannerHero">
+      <section className={styles.scannerHero}>
         <div>
           <p className="eyebrow">Scan reel</p>
           <h1>Scanne le code barre. NutriScan analyse le produit.</h1>
@@ -140,36 +141,36 @@ export default function ScannerClient() {
         </div>
       </section>
 
-      <section className="scannerGrid">
-        <div className="scannerPanel">
-          <div id={scannerId} className="reader" />
-          <p className="scanMessage">{message}</p>
-          <div className="scanActions">
-            {!scanning ? <button className="primary button" onClick={startScanner}>Ouvrir la camera</button> : <button className="secondary button" onClick={stopScanner}>Stop camera</button>}
+      <section className={styles.scannerGrid}>
+        <div className={styles.scannerPanel}>
+          <div id={scannerId} className={styles.reader} />
+          <p className={styles.scanMessage}>{message}</p>
+          <div className={styles.scanActions}>
+            {!scanning ? <button className={`primary ${styles.button}`} onClick={startScanner}>Ouvrir la camera</button> : <button className={`secondary ${styles.button}`} onClick={stopScanner}>Stop camera</button>}
           </div>
         </div>
 
-        <div className="manualPanel">
+        <div className={styles.manualPanel}>
           <h2>Saisie manuelle</h2>
           <p>Utile sur mobile si le navigateur bloque la camera.</p>
           <input value={manualCode} onChange={(event) => setManualCode(event.target.value)} inputMode="numeric" placeholder="EAN / UPC / GTIN" />
-          <button className="primary button" onClick={() => lookup(manualCode)} disabled={loading}>{loading ? "Recherche..." : "Analyser"}</button>
+          <button className={`primary ${styles.button}`} onClick={() => lookup(manualCode)} disabled={loading}>{loading ? "Recherche..." : "Analyser"}</button>
         </div>
       </section>
 
-      <section className="resultPanel" id="result">
+      <section className={styles.resultPanel} id="result">
         {!result && <p className="muted">Aucun produit analyse pour l'instant.</p>}
-        {result && !result.found && <div className="stateBox"><h2>Produit non trouve</h2><p>Code {result.code}. On pourra ajouter un formulaire contribution Open Food Facts ensuite.</p></div>}
+        {result && !result.found && <div className={styles.stateBox}><h2>Produit non trouve</h2><p>Code {result.code}. On pourra ajouter un formulaire contribution Open Food Facts ensuite.</p></div>}
         {result?.found && result.product && (
-          <article className="scanResult">
+          <article className={styles.scanResult}>
             <div>
               <p className="eyebrow">Produit detecte</p>
               <h2>{result.product.name}</h2>
               <p className="muted">{result.product.brand}</p>
-              <div className="resultTags"><span>Nutri-Score {result.product.nutriscore || "?"}</span><span>NOVA {result.product.nova || "?"}</span></div>
+              <div className={styles.resultTags}><span>Nutri-Score {result.product.nutriscore || "?"}</span><span>NOVA {result.product.nova || "?"}</span></div>
             </div>
-            <div className="scoreRing compact"><strong>{score}</strong><span>Sport</span></div>
-            <div className="nutrientList">
+            <div className={`scoreRing ${styles.compact}`}><strong>{score}</strong><span>Sport</span></div>
+            <div className={styles.nutrientList}>
               <p>Energie: {result.product.energyKcal ?? "?"} kcal / 100 g</p>
               <p>Proteines: {result.product.proteins ?? "?"} g</p>
               <p>Sucres: {result.product.sugars ?? "?"} g</p>
