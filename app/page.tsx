@@ -23,7 +23,7 @@ export default function HomePage() {
     <main className="pageShell">
       <nav className="topbar">
         <div className="brand"><span>NS</span> NutriScan</div>
-        <div className="navLinks"><a href="#scan">Scan</a><a href="#science">Science</a><a href="#vnr">VNR Europe</a></div>
+        <div className="navLinks"><a href="/scan">Scan</a><a href="#science">Science</a><a href="#vnr">VNR Europe</a></div>
       </nav>
 
       <section className="hero">
@@ -31,7 +31,7 @@ export default function HomePage() {
           <p className="eyebrow">Nutrition sport extreme</p>
           <h1>Scanne ton produit. Vois s'il tient la route en performance reelle.</h1>
           <p className="lead">Une interface consumer simple, mais un moteur plus scientifique : carburant, recuperation, micronutriments, glycemie et niveau de preuve.</p>
-          <div className="actions"><a className="primary" href="#scan">Simuler un scan</a><a className="secondary" href="#science">Voir le moteur science</a></div>
+          <div className="actions"><a className="primary" href="/scan">Ouvrir le scan</a><a className="secondary" href="#science">Voir le moteur science</a></div>
         </div>
 
         <div className="phone" id="scan">
