@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "Scanner nutritionnel sport extreme avec score performance, VNR Europe et analyse scientifique."
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: any) {
   return (
     <html lang="fr">
       <body>{children}</body>
