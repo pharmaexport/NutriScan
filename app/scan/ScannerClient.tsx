@@ -82,12 +82,19 @@ export default function ScannerClient() {
 
     try {
       const module = await import("html5-qrcode");
+      const formats = [
+        module.Html5QrcodeSupportedFormats.EAN_13,
+        module.Html5QrcodeSupportedFormats.EAN_8,
+        module.Html5QrcodeSupportedFormats.UPC_A,
+        module.Html5QrcodeSupportedFormats.UPC_E,
+        module.Html5QrcodeSupportedFormats.CODE_128
+      ];
       const scanner = new module.Html5Qrcode(scannerId) as ScannerInstance;
       scannerRef.current = scanner;
 
       await scanner.start(
         { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 260, height: 160 }, aspectRatio: 1.6 },
+        { fps: 10, qrbox: { width: 260, height: 160 }, aspectRatio: 1.6, formatsToSupport: formats },
         async (decodedText: string) => {
           const code = decodedText.replace(/[^0-9]/g, "");
           if (code.length >= 8) {
