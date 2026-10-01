@@ -8,3 +8,6 @@ Fichiers ajoutes :
 - src/nutrition/euVnr.ts
 
 Source : Reglement UE 1169/2011, annexe XIII.
+
+
+<!-- CI build probe 3 -->
