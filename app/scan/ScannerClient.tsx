@@ -27,7 +27,7 @@ type ApiResult = {
 type ScannerInstance = {
   start: (...args: any[]) => Promise<unknown>;
   stop: () => Promise<unknown>;
-  clear: () => Promise<unknown>;
+  clear: () => void;
 };
 
 const scannerId = "nutriscan-reader";
