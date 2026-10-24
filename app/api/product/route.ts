@@ -25,9 +25,11 @@ function numberOrNull(value: unknown) {
 }
 
 export async function GET(request: NextRequest) {
-  const code = request.nextUrl.searchParams.get("code")?.replace(/[^0-9]/g, "") || "";
+  const rawCode = request.nextUrl.searchParams.get("code") || "";
+  const code = rawCode.trim();
 
-  if (code.length < 8) {
+  // Only recognized barcode lengths; reject oversized or malformed input before fetch.
+  if (!/^[0-9]{8,14}$/.test(code)) {
     return NextResponse.json({ found: false, code, error: "Code barre invalide" }, { status: 400 });
   }
 
@@ -43,12 +45,18 @@ export async function GET(request: NextRequest) {
   ].join(",");
 
   const url = `https://world.openfoodfacts.org/api/v2/product/${code}.json?fields=${fields}`;
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent": "NutriScan/0.1 contact=pharmaexport"
-    },
-    next: { revalidate: 3600 }
-  });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: {
+        "User-Agent": "NutriScan/0.1 contact=pharmaexport"
+      },
+      signal: AbortSignal.timeout(8000),
+      next: { revalidate: 3600 }
+    });
+  } catch {
+    return NextResponse.json({ found: false, code, error: "Source produit indisponible" }, { status: 502 });
+  }
 
   if (!response.ok) {
     return NextResponse.json({ found: false, code, error: "Source produit indisponible" }, { status: 502 });
